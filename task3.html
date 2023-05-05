@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Temperature Converter</title>
+    <style>
+       body {
+  background-color: #f7f7f7;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 36px;
+  color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 40px;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #666;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+input[type="radio"] {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 20px;
+  color: #666;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 20px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+#result {
+  font-size: 28px;
+  color: #333;
+  margin-top: 30px;
+}
+
+    </style>
+  </head>
+  <body>
+    <h1>Temperature Converter</h1>
+    <label for="temperature-input">Temperature:</label>
+    <input type="text" id="temperature-input" name="temperature" required>
+    <br>
+    <input type="radio" id="fahrenheit-radio" name="unit" value="fahrenheit" checked>
+    <label for="fahrenheit-radio">Fahrenheit</label>
+    <input type="radio" id="celsius-radio" name="unit" value="celsius">
+    <label for="celsius-radio">Celsius</label>
+    <input type="radio" id="kelvin-radio" name="unit" value="kelvin">
+    <label for="kelvin-radio">Kelvin</label>
+    <br>
+    <button id="convert-button">Convert</button>
+    <br>
+    <div id="result"></div>
+    <script>
+       const convertButton = document.getElementById('convert-button');
+const temperatureInput = document.getElementById('temperature-input');
+const resultDisplay = document.getElementById('result');
+
+convertButton.addEventListener('click', () => {
+  const temperature = parseFloat(temperatureInput.value);
+  const unit = document.querySelector('input[name="unit"]:checked').value;
+  let convertedTemperature;
+  let convertedUnit;
+
+  if (isNaN(temperature)) {
+    resultDisplay.textContent = 'Invalid input. Please enter a number.';
+    return;
+  }
+
+  if (unit === 'fahrenheit') {
+    convertedTemperature = (temperature - 32) * 5 / 9;
+    convertedUnit = 'Celsius';
+  } else if (unit === 'celsius') {
+    convertedTemperature = temperature * 9 / 5 + 32;
+    convertedUnit = 'Fahrenheit';
+  } else if (unit === 'kelvin') {
+    convertedTemperature = temperature - 273.15;
+    convertedUnit = 'Celsius';
+  }
+
+  resultDisplay.textContent = `${convertedTemperature.toFixed(2)} ${convertedUnit}`;
+});
+
+    </script>
+  </body>
+</html>
